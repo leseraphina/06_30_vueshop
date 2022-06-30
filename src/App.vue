@@ -1,26 +1,91 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<article>
+    <!-- header -->
+    <NavPrice />
+    <!-- div#box -->
+    <div id="box">
+        <ul class="form">
+            <li>
+                <span>
+                    <label for="userMax">최고값</label>
+                    <input id="userMax" readonly />
+                </span>
+                <span>
+                     선택상품 갯수
+                </span>
+            </li>
+            <li>
+                <input type="range" min="0" max="30000" step="500" />
+            </li>
+            <li>
+                <input type="checkbox" id="userLabel">
+                <label for="userLabel">레벨보기</label>
+            </li>
+        </ul>
+        <ul class="list">
+            <li>
+                <ProductItem />
+            </li>
+        </ul>
+    </div>
+</article>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import ProductData from '@/assets/data.json'
+import ProductItem from '@/components/ProductItem.vue'
+import NavPrice from '@/components/NavPrice.vue'
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+   data(){
+    return {
+        products:ProductData
+    }
+   } ,
+   components:{
+    ProductItem,NavPrice
+   },
+   computed:{},
+   methods:{}
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+body{
+    background-color:#666;
 }
+
+article{
+    width:1000px;
+    margin: 0 auto;
+    padding:0 200px;
+    background-color:#fff;
+}
+#box>ul.form{
+    padding:30px 0;
+}
+#box>ul.form>li{
+    margin-bottom:20px;
+}
+#box>ul.form input{
+    border:none;
+    font-size:25px;
+}
+#box>ul.form input[type="range"]{
+    width:600px;
+}
+#box>ul.form label{
+    display:inline-block;
+    padding:0 20px;
+}
+
+#box>ul.list{
+    padding:20px 30px;
+}
+#box>ul.list>li{
+    padding:5px 0;
+    border-bottom:1px dotted #666;
+    display:flex;
+    flex-direction: row-reverse;
+    flex-wrap:wrap;
+    justify-content: space-between;
+}
+
 </style>
