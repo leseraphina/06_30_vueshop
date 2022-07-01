@@ -3,13 +3,13 @@
         <h3>제품카테고리</h3>
         <dl>
             <dt>구매상품 총 </dt>
-            <dd>????원</dd>
+            <dd>{{cartTotal}}원</dd>
             <dd>
-                <button>장바구니 보기 ???개</button>
-                <ul>
-                    <li>
-                        <span><img src="" alt="" /></span>
-                        <span>이름 : 가격 원</span>
+                <button @click="displayCart = !displayCart">장바구니 보기 {{cart.length}}개</button>
+                <ul v-if="displayCart">
+                    <li v-for="(item,index) in cart" :key="index">
+                        <span><img src="item.image" alt="item.name" /></span>
+                        <span>{{item.name}} : {{item.price}} 원</span>
                     </li>
                 </ul>
             </dd>
@@ -18,7 +18,17 @@
 </template>
 <script>
 export default {
-    
+    data(){
+        return{
+            displayCart:false
+        }  
+    },
+    props:['cart'],
+    computed:{
+        cartTotal(){
+            return this.cart.reduce((inc,item)=> Number(item.price)+ inc , 0)
+        }
+    }
 }
 </script>
 <style scoped>

@@ -1,22 +1,25 @@
 <template>
    <div>
     <figure>
-        <img src="" alt="" />
+        <img :src="item.image" :alt="item.name" />
         <figcaption>
             <dl>
-                <dt>이름</dt>
-                <dd>설명</dd>
+                <dt>{{item.name}}</dt>
+                <dd>{{item.description}}</dd>
                 <dd>레벌</dd>
-                <dd>가격</dd>
+                <dd>{{item.price}}</dd>
             </dl>
         </figcaption>
     </figure>
-    <p><button>+</button></p>
+    <p><button @click="$emit('addToCart',item)">+</button></p>
    </div>
 </template>
 <script>
 export default {
-    
+    props:{
+        item:{type:Object}
+    },
+    emits:['addToCart']
 }
 </script>
 <style scoped>
